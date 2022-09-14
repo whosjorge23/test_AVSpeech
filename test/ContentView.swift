@@ -9,17 +9,22 @@ import SwiftUI
 import AVFoundation
 
 struct ContentView: View {
+    @State private var text: String = ""
+    
     var body: some View {
         VStack(alignment: HorizontalAlignment.center, spacing: 0) {
-            Text("Hello, world!")
+            TextField(
+                    "Isert a text to speak",
+                    text: $text
+                )
                 .padding();
-            Button(action: {print("Button Pressed")}) {
+            Button(action: {buttonPressed()}) {
                 Text("Button")
             }
         }
     }
     func buttonPressed(){
-        let uttarence = AVSpeechUtterance(string: "Hello World")
+        let uttarence = AVSpeechUtterance(string: text)
         uttarence.voice = AVSpeechSynthesisVoice(language: "en-US")
         let synthesizer = AVSpeechSynthesizer()
         synthesizer.speak(uttarence)
