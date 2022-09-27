@@ -13,14 +13,19 @@ struct ContentView: View {
     
     var body: some View {
         VStack(alignment: HorizontalAlignment.center, spacing: 0) {
-            TextField(
-                    "Isert a text to speak",
+            TextEditor(
+//                    "Insert a text to speak",
                     text: $text
                 )
-                .padding();
+            .padding(15);
+            
             Button(action: {buttonPressed()}) {
                 Text("Button")
             }
+            .padding(10)
+            .background(.blue.opacity(0.70))
+            .foregroundColor(.white)
+            .clipShape(Capsule())
         }
     }
     func buttonPressed(){
