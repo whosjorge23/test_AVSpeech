@@ -9,16 +9,23 @@ import SwiftUI
 import AVFoundation
 
 struct ContentView: View {
-    @State private var text: String = ""
+    @State private var text: String = "Enter your text"
+    @State private var isItalian = false
+    @State private var language = "en-US"
     
     var body: some View {
         VStack(alignment: HorizontalAlignment.center, spacing: 0) {
             TextEditor(
-//                    "Insert a text to speak",
-                    text: $text
+                text: $text
                 )
             .padding(15);
             
+            HStack(alignment: VerticalAlignment.center, spacing: 0, content: {
+                Spacer().frame(width: 50)
+                Toggle("Italian",isOn: $isItalian)
+                Spacer().frame(width: 50)
+            })
+            Spacer().frame(height: 50)
             Button(action: {buttonPressed()}) {
                 Text("Button")
             }
@@ -26,11 +33,20 @@ struct ContentView: View {
             .background(.blue.opacity(0.70))
             .foregroundColor(.white)
             .clipShape(Capsule())
+            
+            Spacer().frame(height: 50)
+            
         }
     }
     func buttonPressed(){
+        if isItalian {
+            language = "it-IT"
+        }else{
+            language = "en-US"
+        }
+        
         let uttarence = AVSpeechUtterance(string: text)
-        uttarence.voice = AVSpeechSynthesisVoice(language: "en-US")
+        uttarence.voice = AVSpeechSynthesisVoice(language: language)
         let synthesizer = AVSpeechSynthesizer()
         synthesizer.speak(uttarence)
     }
