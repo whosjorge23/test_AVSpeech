@@ -18,7 +18,13 @@ struct ContentView: View {
             TextEditor(
                 text: $text
                 )
-            .padding(15);
+            .background(Color.black)
+            .frame(height:UIScreen.main.bounds.size.height / 1.5, alignment: .center)
+            .cornerRadius(25)
+            .border(Color.blue.opacity(0.70), width: 3)
+            .lineSpacing(10)
+            .disableAutocorrection(true)
+            .padding(12)
             
             HStack(alignment: VerticalAlignment.center, spacing: 0, content: {
                 Spacer().frame(width: 50)
