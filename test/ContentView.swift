@@ -10,8 +10,10 @@ import AVFoundation
 
 struct ContentView: View {
     @State private var text: String = "Enter your text"
-    @State private var isItalian = false
-    @State private var language = "en-US"
+    @State private var selectedLanguage = "en-US"
+    @State private var language = ""
+    
+    var languages = ["English US", "English GB", "English ZA","Italian IT", "Spanish ES", "French FR"]
     
     var body: some View {
         VStack(alignment: HorizontalAlignment.center, spacing: 0) {
@@ -26,31 +28,44 @@ struct ContentView: View {
             .disableAutocorrection(true)
             .padding(12)
             
-            HStack(alignment: VerticalAlignment.center, spacing: 0, content: {
-                Spacer().frame(width: 50)
-                Toggle("Italian",isOn: $isItalian)
-                Spacer().frame(width: 50)
-            })
-            Spacer().frame(height: 50)
-            Button(action: {buttonPressed()}) {
-                Text("Button")
+            HStack(alignment: VerticalAlignment.center, spacing: 0) {
+                Picker("Please choose a language", selection: $selectedLanguage) {
+                    ForEach(languages, id: \.self) {
+                        Text($0)
+                    }
+                }
+                Spacer().frame(width: 200)
+                Button(action: {buttonPressed()}) {
+                    Text("Button")
+                }
+                .padding(10)
+                .background(.blue.opacity(0.70))
+                .foregroundColor(.white)
+                .clipShape(Capsule())
             }
-            .padding(10)
-            .background(.blue.opacity(0.70))
-            .foregroundColor(.white)
-            .clipShape(Capsule())
             
             Spacer().frame(height: 50)
             
         }
     }
+    
     func buttonPressed(){
-        if isItalian {
+        switch selectedLanguage {
+        case "Italian IT":
             language = "it-IT"
-        }else{
+        case "English US":
+            language = "en-US"
+        case "English GB":
+            language = "en-GB"
+        case "English ZA":
+            language = "en-ZA"
+        case "Spanish ES":
+            language = "es-ES"
+        case "French FR":
+            language = "fr-FR"
+        default:
             language = "en-US"
         }
-        
         let uttarence = AVSpeechUtterance(string: text)
         uttarence.voice = AVSpeechSynthesisVoice(language: language)
         let synthesizer = AVSpeechSynthesizer()
