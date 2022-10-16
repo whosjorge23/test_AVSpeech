@@ -23,7 +23,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             
-            AsyncImage(url: URL(string: "https://pixabay.com/get/gbd3bf7f9e69ac53ce9bd948c03502b6828e068c119d8ef3507ccfd1c675102f505b989e0ba693efaaa3842b0f78bf2405c4039044e22f4529eac77be0ac52fedf6d62f72d983826f064abd7e67e8e61b_1920.jpg")) { image in
+            AsyncImage(url: URL(string: "https://i.imgur.com/QckYg92.jpg")) { image in
                 image.resizable()
             } placeholder: {
                 Color.blue
