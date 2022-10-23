@@ -26,7 +26,7 @@ struct ContentView: View {
             AsyncImage(url: URL(string: "https://i.imgur.com/QckYg92.jpg")) { image in
                 image.resizable()
             } placeholder: {
-                Color.blue
+                Color.indigo
             }
             .frame(width: .infinity, height: .infinity)
             
@@ -37,7 +37,7 @@ struct ContentView: View {
                 .background(Color.clear)
                 .frame(height:UIScreen.main.bounds.size.height / 1.5, alignment: .center)
                 .cornerRadius(25)
-                .border(Color.blue.opacity(0.70), width: 3)
+                .border(Color.indigo.opacity(0.70), width: 3)
                 .lineSpacing(10)
                 .disableAutocorrection(true)
                 .padding(12)
@@ -48,12 +48,13 @@ struct ContentView: View {
                             Text($0)
                         }
                     }
+                    .accentColor(Color.indigo)
                     Spacer().frame(width: 200)
                     Button(action: {buttonPressed()}) {
                         Text("Button")
                     }
                     .padding(10)
-                    .background(.blue.opacity(0.70))
+                    .background(.indigo.opacity(0.70))
                     .foregroundColor(.white)
                     .clipShape(Capsule())
                 }
